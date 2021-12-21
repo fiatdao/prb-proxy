@@ -1,10 +1,12 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.4;
 
+import { IERC1155Receiver } from "@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol";
+
 /// @title IPRBProxy
 /// @author Paul Razvan Berg
 /// @notice Proxy contract to compose transactions on owner's behalf.
-interface IPRBProxy {
+interface IPRBProxy is IERC1155Receiver {
     /// EVENTS ///
 
     event Execute(address indexed target, bytes data, bytes response);

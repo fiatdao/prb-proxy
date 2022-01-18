@@ -2,11 +2,12 @@
 pragma solidity >=0.8.4;
 
 import { IERC1155Receiver } from "@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol";
+import { IERC721Receiver } from "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
 
 /// @title IPRBProxy
 /// @author Paul Razvan Berg
 /// @notice Proxy contract to compose transactions on owner's behalf.
-interface IPRBProxy is IERC1155Receiver {
+interface IPRBProxy is IERC1155Receiver, IERC721Receiver {
     /// EVENTS ///
 
     event Execute(address indexed target, bytes data, bytes response);

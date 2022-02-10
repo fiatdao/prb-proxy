@@ -78,8 +78,8 @@ To deploy your own proxy, you can use the registry at the address below. In fact
 
 | Contract         | Address                                    |
 | ---------------- | ------------------------------------------ |
-| PRBProxyRegistry | 0xc918902ef2f428f2dc77e3b4b5e5e153aab9d1b0 |
-| PRBProxyFactory  | 0x4873edd9246595b52af0de6349327ec13775dbd1 |
+| PRBProxyRegistry | 0x331f3d5c3c3790e0041b5f4f91b48cd2557f96ca |
+| PRBProxyFactory  | 0x87ca60e2c2545ae94c9fb850daf670a91685933d |
 
 ### Supported Chains
 
@@ -91,7 +91,7 @@ The address of the contracts are the same on all supported chains.
 - [ ] Fantom
 - [x] Ethereum Goerli Testnet
 - [ ] Ethereum Kovan Testnet
-- [x] Ethereum Rinkeby Testnet
+- [ ] Ethereum Rinkeby Testnet
 - [ ] Ethereum Ropsten Testnet
 
 ## Code Snippets

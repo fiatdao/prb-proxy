@@ -3,6 +3,7 @@ pragma solidity >=0.8.4;
 
 import "./IPRBProxy.sol";
 import { ERC1155Holder } from "@openzeppelin/contracts/token/ERC1155/utils/ERC1155Holder.sol";
+import { ERC721Holder } from "@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol";
 
 /// @notice Emitted when the caller is not the owner.
 error PRBProxy__ExecutionNotAuthorized(address owner, address caller, address target, bytes4 selector);
@@ -21,7 +22,7 @@ error PRBProxy__TargetInvalid(address target);
 
 /// @title PRBProxy
 /// @author Paul Razvan Berg
-contract PRBProxy is IPRBProxy, ERC1155Holder {
+contract PRBProxy is IPRBProxy, ERC1155Holder, ERC721Holder {
     /// PUBLIC STORAGE ///
 
     /// @inheritdoc IPRBProxy

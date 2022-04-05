@@ -57,16 +57,16 @@ just keep in mind the differences between the two.
 With yarn:
 
 ```bash
-$ yarn add prb-proxy ethers@5
+$ yarn add @prb/proxy ethers@5
 ```
 
 Or npm:
 
 ```bash
-$ npm install prb-proxy ethers@5
+$ npm install @prb/proxy ethers@5
 ```
 
-The trailing package is ethers.js, the only peer dependency of `prb-proxy`.
+The trailing package is ethers.js, the only peer dependency of `@prb/proxy`.
 
 ## Usage
 
@@ -78,17 +78,18 @@ To deploy your own proxy, you can use the registry at the address below. In fact
 
 | Contract         | Address                                    |
 | ---------------- | ------------------------------------------ |
-| PRBProxyRegistry | 0xE29bCc91E088733a584FfCa4013d258957BfCe60 |
-| PRBProxyFactory  | 0xc3b9b328b2F1175C4FcE1C441ebC58b573920db0 |
+| PRBProxyRegistry | 0x43fA1CFCacAe71492A36198EDAE602Fe80DdcA63 |
+| PRBProxyFactory  | 0xb0C00C9B13a978D8F18bd2BAdc8ad1A123E843ED |
 
 ### Supported Chains
 
 The address of the contracts are the same on all supported chains.
 
 - [x] Ethereum Mainnet
-- [x] Polygon Mainnet
+- [x] Avalanche C-Chain
 - [x] Binance Smart Chain Mainnet
-- [x] Fantom
+- [x] Fantom Opera
+- [x] Polygon Mainnet
 - [x] Ethereum Goerli Testnet
 - [x] Ethereum Kovan Testnet
 - [x] Ethereum Rinkeby Testnet
@@ -161,8 +162,8 @@ seed that the factory will use, you can query the constant function `getNextSeed
 
 ```ts
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
+import { PRBProxyFactory, computeProxyAddress, getPRBProxyFactory } from "@prb/proxy";
 import { task } from "hardhat/config";
-import { PRBProxyFactory, computeProxyAddress, getPRBProxyFactory } from "prb-proxy";
 
 task("compute-proxy-address").setAction(async function (_, { ethers }) {
   const signers: SignerWithAddress[] = await ethers.getSigners();
@@ -190,8 +191,8 @@ can have only one proxy at a time.
 
 ```ts
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
+import { PRBProxyRegistry, getPRBProxyRegistry } from "@prb/proxy";
 import { task } from "hardhat/config";
-import { PRBProxyRegistry, getPRBProxyRegistry } from "prb-proxy";
 
 task("deploy-proxy").setAction(async function (_, { ethers }) {
   const signers: SignerWithAddress[] = await ethers.getSigners();
@@ -218,8 +219,8 @@ Before deploying a new proxy, you may need to know if the account owns one alrea
 
 ```ts
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
+import { PRBProxyRegistry, getPRBProxyRegistry } from "@prb/proxy";
 import { task } from "hardhat/config";
-import { PRBProxyRegistry, getPRBProxyRegistry } from "prb-proxy";
 
 task("get-current-proxy").setAction(async function (_, { ethers }) {
   const signers: SignerWithAddress[] = await ethers.getSigners();
@@ -246,11 +247,11 @@ This section assumes that you already own a PRBProxy and that you compiled and d
 import type { BigNumber } from "@ethersproject/bignumber";
 import { parseUnits } from "@ethersproject/units";
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
+import { PRBProxy, getPRBProxy } from "@prb/proxy";
 import { task } from "hardhat/config";
-import { PRBProxy, getPRBProxy } from "prb-proxy";
 
-import { TargetERC20Transfer__factory } from "../types/factories/TargetERC20Transfer__factory";
 import type { TargetERC20Transfer } from "../types/TargetERC20Transfer";
+import { TargetERC20Transfer__factory } from "../types/factories/TargetERC20Transfer__factory";
 
 task("execute-composite-call").setAction(async function (_, { ethers }) {
   const signers: SignerWithAddress[] = await ethers.getSigners();
@@ -278,8 +279,7 @@ task("execute-composite-call").setAction(async function (_, { ethers }) {
 
 ## Gas Efficiency
 
-It costs 577,443 gas to deploy a PRBProxy, whereas in the case of DSProxy the cost is 596,198 gas. That's a slight
-reduction in deployment costs, but every little helps.
+It costs 562,500 gas to deploy a PRBProxy, whereas DSProxy costs 596,198 gas. That's a slight reduction in deployment costs - but every little helps.
 
 The `execute` function in PRBProxy costs a bit more than its equivalent in DSProxy. This is because of the additional
 safety checks, but the lion's share of the gas cost when calling `execute` is due to the logic in the target contract.
